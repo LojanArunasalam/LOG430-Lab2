@@ -63,3 +63,6 @@ class User(Base):
 
 # Will create the database + the tables associated with it
 Base.metadata.create_all(engine)
+
+if __name__ == "__main__":
+    pass
