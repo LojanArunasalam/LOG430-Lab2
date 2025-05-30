@@ -1,0 +1,23 @@
+@startuml
+
+hide circle
+hide members
+
+title Diagramme de package - Système de point de vente 
+
+package " Couche Présentation " as P1 {
+    folder "TUI"
+}
+
+package " Couche Logique " as P2 {
+    folder "App"
+}
+
+package " Couche Persistence " as P3 {
+    folder "Database"
+}
+
+
+TUI --> App
+App --> Database
+@enduml

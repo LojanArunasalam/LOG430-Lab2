@@ -1,0 +1,25 @@
+@startuml  
+
+
+title Diagramme de déploiement - Système de point de vente
+node "<<device>>\nClient POS" { 
+    artifact { 
+        file "app.py" 
+    }
+
+    artifact { 
+        file "models.py"
+    }
+}
+
+database "<<device>>\ndb_server" { 
+    artifact { 
+        agent "PostgreSQL server"
+    }
+}
+
+
+"app.py" --> "models.py"
+"<<device>>\nClient POS" -->"<<device>>\ndb_server" : ORM via SQLAlchemy
+
+@enduml 

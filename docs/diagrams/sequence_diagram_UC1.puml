@@ -1,0 +1,19 @@
+@startuml
+skinparam style strictuml
+skinparam defaultfontname Verdana
+skinparam sequence {
+    MessageAlign center
+}
+
+title Diagramme de séquence UC1 - Rechercher un produit   
+
+participant "user" as user
+participant "app" as app
+participant "database" as db 
+
+user -> app : Rechercher un produit
+app -> db : check_product(id / nom / categorie)
+db --> app : p: produit
+app --> user: Afficher produit
+
+@enduml

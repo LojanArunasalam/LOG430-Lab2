@@ -1,0 +1,36 @@
+@startuml
+
+title Diagramme de classes - Système de point de vente
+
+class Produit {
+  id: int
+  nom: str
+  description: str
+  categorie: str
+  prix_unitaire: float
+  quantite_stock: int
+}
+
+class Vente {
+  id: int
+  total: float
+}
+
+class LigneVente {
+  id: int
+  quantite: int
+  prix_total: float
+}
+
+class User {
+  id: int
+  nom: str
+  identifiant: str
+}
+
+' Relations entre classes
+Vente "1" -- "0..*" LigneVente : contient >
+LigneVente "0..*" --> "1" Produit : réfert à un >
+Vente "*" --> "1" User : < fait
+
+@enduml

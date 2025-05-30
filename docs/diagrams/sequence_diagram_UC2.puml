@@ -1,0 +1,20 @@
+@startuml
+skinparam style strictuml
+skinparam defaultfontname Verdana
+skinparam sequence {
+    MessageAlign center
+}
+
+title Diagramme de séquence UC2 - Enregistrer une vente
+
+participant "user" as user
+participant "app" as app
+participant "database" as db 
+
+user -> app : Enregistrer une vente 
+alt stock > 0
+    app -> db : register_sale(product)
+else 
+    db --> app : "Pas de produits disponibles"
+end
+@enduml

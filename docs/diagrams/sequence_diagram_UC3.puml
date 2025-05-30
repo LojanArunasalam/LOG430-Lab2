@@ -1,0 +1,18 @@
+@startuml
+skinparam style strictuml
+skinparam defaultfontname Verdana
+skinparam sequence {
+    MessageAlign center
+}
+
+title Diagramme de séquence UC3 - Gérer un retour de vente
+
+participant "user" as user
+participant "app" as app
+participant "database" as db 
+
+user -> app : Gérer un retour 
+app -> db : return_sale(sale)
+
+
+@enduml

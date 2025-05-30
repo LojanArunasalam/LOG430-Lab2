@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+actor "Utilisateur" as user
+rectangle système_POS {
+  usecase "Rechercher un produit" as UC1
+  usecase "Enregistrer une vente" as UC2
+  usecase "Gérer les retours" as UC3
+  usecase "Consulter le stock" as UC4
+}
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+@enduml
