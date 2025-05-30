@@ -49,6 +49,17 @@ class User(Base):
     #Relationships
     sale = relationship(Sale)
 
+# class CentralHub(Base):
+#     __tablename__ = "central_hubs"
+
+# class Store(Base):
+#     __tablename_ = "stores"
+
+
+
+# class SupplyRequest(Base):
+#     __tablename__ = "supply_requests"
+
 
 # Will create the database + the tables associated with it
 Base.metadata.create_all(engine)
