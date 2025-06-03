@@ -8,7 +8,6 @@ class Produit {
   description: str
   categorie: str
   prix_unitaire: float
-  quantite_stock: int
 }
 
 class Vente {
@@ -22,15 +21,36 @@ class LigneVente {
   prix_total: float
 }
 
-class User {
+class Utilisateur {
   id: int
   nom: str
   identifiant: str
 }
 
+class Stock { 
+  id: int 
+  quantite: int
+  product: Product
+}
+
+class Magasin { 
+  id: int
+  name: str
+  location: str
+}
+
+class CentreLogistique { 
+  id: int
+  product: str
+  quantite: int
+}
+
 ' Relations entre classes
 Vente "1" -- "0..*" LigneVente : contient >
 LigneVente "0..*" --> "1" Produit : réfert à un >
-Vente "*" --> "1" User : < fait
-
+Vente "*" --> "1" Utilisateur : < fait
+Produit "1" --> "1" Stock : a > 
+Magasin "1" --> "0..*" Stock: contient du > 
+Magasin "1"--> "0..*" Vente : ont des
+CentreLogistique "1" --> "0..*" Produit: ont des
 @enduml

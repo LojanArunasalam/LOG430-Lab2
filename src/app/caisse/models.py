@@ -1,3 +1,4 @@
+from django.db import models
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, create_engine 
 
@@ -16,6 +17,18 @@ class LineSale(Base):
     sale = Column(Integer, ForeignKey("sales.id"))
     product = Column(Integer, ForeignKey("products.id"))
 
+class Stock(Base):
+    __tablename__ = "stocks"
+    id = Column(Integer, primary_key=True)
+    quantite = Column(Integer, primary_key=True)
+
+    #Relationsips
+    product = Column(Integer, ForeignKey("products.id"))
+    store = Column(Integer, ForeignKey("stores.id"))
+
+    def __str__(self):
+        return f"{self.quantite}"
+
 class Product(Base):
     __tablename__ = "products"
 
@@ -24,10 +37,10 @@ class Product(Base):
     category = Column(String)
     description = Column(String)
     prix_unitaire = Column(Float)
-    stock = Column(Integer)
-
+    
     #Relationships
-    ligne_vente = relationship(LineSale)
+    line_sale = relationship(LineSale)
+    stock = relationship(Stock)
 
 
 class Sale(Base):
@@ -35,10 +48,11 @@ class Sale(Base):
 
     id = Column(Integer, primary_key=True)
     total = Column(Float)
-    user = Column(ForeignKey("users.id"))
 
     #Relationships
     line_vente = relationship(LineSale)
+    user = Column(ForeignKey("users.id"))
+    store = Column(ForeignKey("stores.id"))
 
 class User(Base):
     __tablename__ = "users"
@@ -49,20 +63,25 @@ class User(Base):
     #Relationships
     sale = relationship(Sale)
 
-# class CentralHub(Base):
-#     __tablename__ = "central_hubs"
+class Product_Depot(Base):
+    __tablename__ = "products_depot"
 
-# class Store(Base):
-#     __tablename_ = "stores"
-
-
-
-# class SupplyRequest(Base):
-#     __tablename__ = "supply_requests"
+    id = Column(Integer, primary_key=True)
+    quantite_depot = Column(Integer)
+    #Relationships
+    products = Column(ForeignKey("products.id"))
+    
 
 
+class Store(Base):
+    # Includes the parent house (maison mere)
+    __tablename__ = "stores"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    #Relationships
+    stocks = relationship(Stock)
+    sales = relationship(Sale)
+    
 # Will create the database + the tables associated with it
 Base.metadata.create_all(engine)
-
-if __name__ == "__main__":
-    pass

@@ -1,6 +1,6 @@
 services: 
-  django: 
-    build: . 
+  # django: 
+  #   build: . 
   db:
     image: postgres:16
     container_name: db

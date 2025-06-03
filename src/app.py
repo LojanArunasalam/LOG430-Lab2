@@ -21,7 +21,7 @@ def main():
             product = controller.get_product_by_id(id) 
 
             if product:
-                print(f"Name: {product.name}, Description: {product.description}, Nombre en stock: {product.stock}")
+                print(f"Name: {product.name}, Description: {product.description}")
             else:
                 print("Produit non trouvé")
         elif choice == 2:
@@ -55,9 +55,10 @@ def main():
             session.commit()
         elif choice == 3:
             id = int(input("Mettez l'ID du produit: "))
-            product =  controller.get_stock(id)
+            stocks =  controller.get_stock(id)
 
-            print(f"Quantite actuel: {product.stock}")
+            for i, stock in enumerate(stocks):
+                print(f"Magasin {i+1}: {stock}")
         elif choice == 4:
             break
         else:
