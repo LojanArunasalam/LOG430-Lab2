@@ -1,11 +1,109 @@
-{% extends "base.html" %} {% block title %} Product lists {% endblock %}
-{% block content %}
-<h1>Product list store 1</h1>
-<ul>
-    {% for product in products1 %}
-    <li>
-        {{ product.name }}, {{ product.category }}, {{ product.prix }}
-    </li>
-    {% endfor %}
-</ul>
-{% endblock %}
+<h1><a href="">Products Store 1</a></h1>
+<table>
+<tr>
+    <th>Product ID</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Quantity</th>
+</tr>
+{% for product, stock in zipped1 %}
+    <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.prix_unitaire}}$</td>
+        <td>{{stock.quantite}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+<h1><a href="">Products Store 2</a></h1>
+<table>
+<tr>
+    <th>Product ID</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Quantity</th>
+</tr>
+{% for product, stock in zipped2 %}
+    <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.prix_unitaire}}$</td>
+        <td>{{stock.quantite}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+<h1><a href="">Products Store 3</a></h1>
+<table>
+<tr>
+    <th>Product ID</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Quantity</th>
+</tr>
+{% for product, stock in zipped3 %}
+    <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.prix_unitaire}}$</td>
+        <td>{{stock.quantite}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+<h1><a href="">Products Store 4</a></h1>
+<table>
+<tr>
+    <th>Product ID</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Quantity</th>
+</tr>
+{% for product, stock in zipped4 %}
+    <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.prix_unitaire}}$</td>
+        <td>{{stock.quantite}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+<h1><a href="">Products Store 5</a></h1>
+<table>
+<tr>
+    <th>Product ID</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Quantity</th>
+</tr>
+{% for product, stock in zipped5 %}
+    <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.prix_unitaire}}$</td>
+        <td>{{stock.quantite}}</td>
+    </tr>
+{% endfor %}
+</table>
