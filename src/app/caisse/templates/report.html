@@ -1,78 +1,102 @@
-<h1>Report</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container { 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .container > table { 
+            margin-left: auto;margin-right: auto; width: 40%;
+        }
 
-<h2>Store 1</h2>
-<table>
-<tr>
-    <th>Sale ID</th>
-    <th>Sale total</th>
-    <th>Sale details</th>
-</tr>
-{% for sale in sales1 %}
-    <tr>
-        <td>{{sale.id}}</td>
-        <td>{{sale.total}}$</td>
-        <td>
-        {% for line in lines_sales1%}
-        <li>{{line.id}}, {{line.product}}</li>
+        .container > h1 { 
+            margin-left: auto; margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Report</h1>
+
+        <h2>Store 1</h2>
+        <table>
+        <tr>
+            <th>Sale ID</th>
+            <th>Sale total</th>
+            <th>Sale details</th>
+        </tr>
+        {% for sale in sales1 %}
+            <tr>
+                <td>{{sale.id}}</td>
+                <td>{{sale.total}}$</td>
+                <td>
+                {% for line in lines_sales1%}
+                <li>{{line.id}}, {{line.product}}</li>
+                {% endfor %}
+                </td>
+            
+            </tr>
         {% endfor %}
-        </td>
-       
-    </tr>
-{% endfor %}
-</table>
+        </table>
 
-<h2>Store 2</h2>
-<table>
-<tr>
-    <th>Sale ID</th>
-    <th>Sale total</th>
-</tr>
-{% for sale in sales2 %}
-    <tr>
-        <td>{{sale.id}}</td>
-        <td>{{sale.total}}$</td>
-    </tr>
-{% endfor %}
-</table>
+        <h2>Store 2</h2>
+        <table>
+        <tr>
+            <th>Sale ID</th>
+            <th>Sale total</th>
+        </tr>
+        {% for sale in sales2 %}
+            <tr>
+                <td>{{sale.id}}</td>
+                <td>{{sale.total}}$</td>
+            </tr>
+        {% endfor %}
+        </table>
 
-<h2>Store 3</h2>
-<table>
-<tr>
-    <th>Sale ID</th>
-    <th>Sale total</th>
-</tr>
-{% for sale in sales3 %}
-    <tr>
-        <td>{{sale.id}}</td>
-        <td>{{sale.total}}$</td>
-    </tr>
-{% endfor %}
-</table>
+        <h2>Store 3</h2>
+        <table>
+        <tr>
+            <th>Sale ID</th>
+            <th>Sale total</th>
+        </tr>
+        {% for sale in sales3 %}
+            <tr>
+                <td>{{sale.id}}</td>
+                <td>{{sale.total}}$</td>
+            </tr>
+        {% endfor %}
+        </table>
 
-<h2>Store 4</h2>
-<table>
-<tr>
-    <th>Sale ID</th>
-    <th>Sale total</th>
-</tr>
-{% for sale in sales4 %}
-    <tr>
-        <td>{{sale.id}}</td>
-        <td>{{sale.total}}$</td>
-    </tr>
-{% endfor %}
-</table>
+        <h2>Store 4</h2>
+        <table>
+        <tr>
+            <th>Sale ID</th>
+            <th>Sale total</th>
+        </tr>
+        {% for sale in sales4 %}
+            <tr>
+                <td>{{sale.id}}</td>
+                <td>{{sale.total}}$</td>
+            </tr>
+        {% endfor %}
+        </table>
 
-<h2>Store 5</h2>
-<table>
-<tr>
-    <th>Sale ID</th>
-    <th>Sale total</th>
-</tr>
-{% for sale in sales5 %}
-    <tr>
-        <td>{{sale.id}}</td>
-        <td>{{sale.total}}$</td>
-    </tr>
-{% endfor %}
-</table>
+        <h2>Store 5</h2>
+        <table>
+        <tr>
+            <th>Sale ID</th>
+            <th>Sale total</th>
+        </tr>
+        {% for sale in sales5 %}
+            <tr>
+                <td>{{sale.id}}</td>
+                <td>{{sale.total}}$</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

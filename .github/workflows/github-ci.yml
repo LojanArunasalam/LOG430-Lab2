@@ -45,4 +45,4 @@ jobs:
     - name: Publish to Docker Hub
       run: |
         docker login -u lojanarun -p ${{ secrets.DOCKER_HUB_TOKEN}}
-        docker push lojanarun/caisse:latest
+        docker push lojanarun/lab2:latest

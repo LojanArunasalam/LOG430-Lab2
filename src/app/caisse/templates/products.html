@@ -1,109 +1,178 @@
-<h1><a href="">Products Store 1</a></h1>
-<table>
-<tr>
-    <th>Product ID</th>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Quantity</th>
-</tr>
-{% for product, stock in zipped1 %}
-    <tr>
-        <td>{{product.id}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.category}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.prix_unitaire}}$</td>
-        <td>{{stock.quantite}}</td>
-    </tr>
-{% endfor %}
-</table>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container { 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .container > table { 
+            margin-left: auto;margin-right: auto; width: 40%;
+        }
 
-<h1><a href="">Products Store 2</a></h1>
-<table>
-<tr>
-    <th>Product ID</th>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Quantity</th>
-</tr>
-{% for product, stock in zipped2 %}
+        .container > h1 { 
+            margin-left: auto; margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <form method="GET" style="text-align: center; margin-bottom: 20px;">
+    <label for="id">Search Product by ID:</label>
+    <input type="number" name="id" id="id" placeholder="Enter Product ID" required>
+    <button type="submit">Search</button>
+</form>
+    <div class="container">
+    <h1><a href="">Products Store 1</a></h1>
+    <table>
     <tr>
-        <td>{{product.id}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.category}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.prix_unitaire}}$</td>
-        <td>{{stock.quantite}}</td>
+        <th>Product ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Restock?</th>
     </tr>
-{% endfor %}
-</table>
+    {% for product, stock in zipped1 %}
+        <tr>
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.prix_unitaire}}$</td>
+            <td>{{stock.quantite}}</td>
+            <td>
+                {% if stock.quantite < 25 %}
+                    <button href="/restock/{{depot.products}}">Restock</button>
+                {% else %}
+                    No restock needed
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
 
-<h1><a href="">Products Store 3</a></h1>
-<table>
-<tr>
-    <th>Product ID</th>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Quantity</th>
-</tr>
-{% for product, stock in zipped3 %}
+    <h1 ><a href="">Products Store 2</a></h1>
+    <table>
     <tr>
-        <td>{{product.id}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.category}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.prix_unitaire}}$</td>
-        <td>{{stock.quantite}}</td>
+        <th>Product ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Restock?</th>
     </tr>
-{% endfor %}
-</table>
+    {% for product, stock in zipped2 %}
+        <tr>
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.prix_unitaire}}$</td>
+            <td>{{stock.quantite}}</td>
+            <td>
+                {% if stock.quantite < 25 %}
+                    <button href="/restock/{{depot.products}}">Restock</button>
+                {% else %}
+                    No restock needed
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
 
-<h1><a href="">Products Store 4</a></h1>
-<table>
-<tr>
-    <th>Product ID</th>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Quantity</th>
-</tr>
-{% for product, stock in zipped4 %}
+    <h1><a href="">Products Store 3</a></h1>
+    <table>
     <tr>
-        <td>{{product.id}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.category}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.prix_unitaire}}$</td>
-        <td>{{stock.quantite}}</td>
+        <th>Product ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Restock?</th>
     </tr>
-{% endfor %}
-</table>
+    {% for product, stock in zipped3 %}
+        <tr>
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.prix_unitaire}}$</td>
+            <td>{{stock.quantite}}</td>
+            <td>
+                {% if stock.quantite < 25 %}
+                    <button href="/restock/{{depot.products}}">Restock</button>
+                {% else %}
+                    No restock needed
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
 
-<h1><a href="">Products Store 5</a></h1>
-<table>
-<tr>
-    <th>Product ID</th>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Quantity</th>
-</tr>
-{% for product, stock in zipped5 %}
+    <h1><a href="">Products Store 4</a></h1>
+    <table>
     <tr>
-        <td>{{product.id}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.category}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.prix_unitaire}}$</td>
-        <td>{{stock.quantite}}</td>
+        <th>Product ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Restock?</th>
     </tr>
-{% endfor %}
-</table>
+    {% for product, stock in zipped4 %}
+        <tr>
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.prix_unitaire}}$</td>
+            <td>{{stock.quantite}}</td>
+            <td>
+                {% if stock.quantite < 25 %}
+                    <button href="/restock/{{depot.products}}">Restock</button>
+                {% else %}
+                    No restock needed
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <h1 ><a href="">Products Store 5</a></h1>
+    <table> 
+    <tr>
+        <th>Product ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Restock?</th>
+    </tr>
+    {% for product, stock in zipped5 %}
+        <tr>
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.prix_unitaire}}$</td>
+            <td>{{stock.quantite}}</td>
+            <td>
+                {% if stock.quantite < 25 %}
+                    <button href="/restock/{{depot.products}}">Restock</button>
+                {% else %}
+                    No restock needed
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+</body>
+</html>
