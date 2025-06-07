@@ -1,6 +1,6 @@
 @startuml
 
-title Diagramme de classes - Système de point de vente
+title Diagramme de classes - Système de magasin
 
 class Produit {
   id: int
@@ -39,7 +39,7 @@ class Magasin {
   location: str
 }
 
-class CentreLogistique { 
+class ProductDepot { 
   id: int
   product: str
   quantite: int

@@ -1,19 +1,22 @@
 from django.shortcuts import render, HttpResponse, redirect
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import select
-from .models import Product, Stock, Sale, LineSale, Store, Product_Depot, engine
+from .models import Product, Stock, Sale, LineSale, Store, Product_Depot, engine, logging
 from . import controller
 
 Session = sessionmaker(bind=engine)
 session = Session()
 
 def home(request):
+    logging.info("Rendering home page")
     return render(request, "home.html")
 
 def report(request, store_id):
+    logging.info(f"Rendering report for store {store_id}")
     return render(request, "report.html", controller.generate_report(store_id))
 
 def restock_product(request, product_id, store_id):
+    logging.info(f"Restocking...")
     quantity = 1 
     # r_product_id = request.GET.get('product_id')
     # r_store_id = request.GET.get('store_id')
@@ -22,13 +25,14 @@ def restock_product(request, product_id, store_id):
     return redirect("products")  # Redirect back to products page
 
 def performances(request):
+    logging.info("Rendering performances page")
     performances_data = controller.performances()
     return render(request, "performances.html", {
         "performances" : performances_data
     })
 
 def search_products(request):
-
+    logging.info("Rendering search products page")
     r_id = request.GET.get('id')
 
     if not r_id: 
@@ -67,6 +71,7 @@ def search_products(request):
             })
 
 def dashboard_logistique(request):
+    logging.info("Rendering stock-central page")
     depots = Product_Depot.get_all_product_depots(session)
     return render(request, "stock-central.html", {"depots": depots})
 

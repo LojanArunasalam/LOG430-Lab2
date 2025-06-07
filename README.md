@@ -3,10 +3,6 @@
 # Architecture de l'application 
 ![Architecture de l'application](images/image.png)
 
-
-# Deploiement de l'application
-![Déploiement de l'application](images/image2.png)
-
 # Lancer le projet 
 1. Se placer sur le root directory
 ```
@@ -26,3 +22,5 @@ docker compose run --rm --service-ports caisse-2
 docker compose run --rm --service-ports caisse-3
 ```
 
+# Lancer les tests
+1.
