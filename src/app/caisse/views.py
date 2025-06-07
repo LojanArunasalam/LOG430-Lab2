@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import select
 from .models import Product, Stock, Sale, LineSale, Store, Product_Depot, engine
-
+from . import controller
 
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -10,70 +10,64 @@ session = Session()
 def home(request):
     return render(request, "home.html")
 
-# def sales_report(request):
-#     sales1 = get_sales_by_store(1)
-#     sales2 = get_sales_by_store(2)
-#     sales3 = get_sales_by_store(3)
-#     sales4 = get_sales_by_store(4)
-#     sales5 = get_sales_by_store(5)
+def report(request, store_id):
+    return render(request, "report.html", controller.generate_report(store_id))
 
-#     return render(request, "report.html", {
-#         "sales1": sales1,
-#         "sales2": sales2,
-#         "sales3": sales3,
-#         "sales4": sales4,
-#         "sales5": sales5
-#     })
+def restock_product(request, product_id, store_id):
+    quantity = 1 
+    # r_product_id = request.GET.get('product_id')
+    # r_store_id = request.GET.get('store_id')
+
+    controller.restock_from_depot(product_id, quantity, store_id)
+    return redirect("products")  # Redirect back to products page
+
+def performances(request):
+    performances_data = controller.performances()
+    return render(request, "performances.html", {
+        "performances" : performances_data
+    })
 
 def search_products(request):
 
     r_id = request.GET.get('id')
-    
+
     if not r_id: 
-        products = Product.get_all_products()
-        list_stocks_store_1 = Store.get_stock_by_store(session, 1)
-        list_stocks_store_2 = Store.get_stock_by_store(session, 2)
-        list_stocks_store_3 = Store.get_stock_by_store(session, 3)
-        list_stocks_store_4 = Store.get_stock_by_store(session, 4)
-        list_stocks_store_5 = Store.get_stock_by_store(session, 5)
+        zipped1 = controller.get_product_with_stocks(1)
+        zipped2 = controller.get_product_with_stocks(2)
+        zipped3 = controller.get_product_with_stocks(3)
+        zipped4 = controller.get_product_with_stocks(4)
+        zipped5 = controller.get_product_with_stocks(5)
 
-        zipped1 = zip(products, list_stocks_store_1)
-        zipped2 = zip(products, list_stocks_store_2)
-        zipped3 = zip(products, list_stocks_store_3)
-        zipped4 = zip(products, list_stocks_store_4)
-        zipped5 = zip(products, list_stocks_store_5)
-
-        return render(request, "products.html", 
-            {"zipped1": zipped1,
+        return render(request, "products.html", {
+            "zipped1": zipped1,
             "zipped2": zipped2,
             "zipped3": zipped3,
             "zipped4": zipped4,
-            "zipped5": zipped5}
-        )
-    else:
-        products = []
-        product = get_product_by_id(r_id)
+            "zipped5": zipped5
+        })
+    else: 
+        product = Product.get_by_id(session, r_id)
 
         if not product: 
             return HttpResponse("Product not found")
         
-        products.append(product)
-        stock1 = get_stock(product.id, 1)
-        stock2 = get_stock(product.id, 2)
-        stock3 = get_stock(product.id, 3)
-        stock4 = get_stock(product.id, 4)
-        stock5 = get_stock(product.id, 5)
-        stocks = [stock1, stock2, stock3, stock4, stock5]
-        
-
-        zipped1 = zip(products, stocks)
+        zipped1 = zip([product], [Stock.get_stock_by_product_and_store(session, product.id, 1)])
+        zipped2 = zip([product], [Stock.get_stock_by_product_and_store(session, product.id, 2)])
+        zipped3 = zip([product], [Stock.get_stock_by_product_and_store(session, product.id, 3)])
+        zipped4 = zip([product], [Stock.get_stock_by_product_and_store(session, product.id, 4)])
+        zipped5 = zip([product], [Stock.get_stock_by_product_and_store(session, product.id, 5)])
 
         return render(request, "products.html", 
-            {"zipped1": zipped1}
-        )
+            { 
+                "zipped1": zipped1,
+                "zipped2": zipped2,
+                "zipped3": zipped3,
+                "zipped4": zipped4,
+                "zipped5": zipped5
+            })
 
 def dashboard_logistique(request):
-    depots = Product_Depot.get_all_product_depots(session=session)
+    depots = Product_Depot.get_all_product_depots(session)
     return render(request, "stock-central.html", {"depots": depots})
 
 

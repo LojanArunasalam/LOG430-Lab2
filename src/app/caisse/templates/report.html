@@ -9,93 +9,44 @@
             flex-direction: column; 
         }
         .container > table { 
-            margin-left: auto;margin-right: auto; width: 40%;
+            margin-left: auto;margin-right: auto; width: 80%;
         }
 
         .container > h1 { 
             margin-left: auto; margin-right: auto;
         }
+
+        table, th, td {
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Report</h1>
-
-        <h2>Store 1</h2>
+        <h1>Store {{store_id}}</h1>
         <table>
-        <tr>
-            <th>Sale ID</th>
-            <th>Sale total</th>
-            <th>Sale details</th>
-        </tr>
-        {% for sale in sales1 %}
             <tr>
-                <td>{{sale.id}}</td>
-                <td>{{sale.total}}$</td>
-                <td>
-                {% for line in lines_sales1%}
-                <li>{{line.id}}, {{line.product}}</li>
-                {% endfor %}
-                </td>
-            
+                <th>Sales</th>
+                <th>Most Sold Product</th>
+                <th>Amount of Most Sold Product</th>
             </tr>
-        {% endfor %}
-        </table>
-
-        <h2>Store 2</h2>
-        <table>
-        <tr>
-            <th>Sale ID</th>
-            <th>Sale total</th>
-        </tr>
-        {% for sale in sales2 %}
-            <tr>
-                <td>{{sale.id}}</td>
-                <td>{{sale.total}}$</td>
+                    <td>
+                    {% for sale in sales %}
+                        <ul>
+                            <li>{{ sale }}</li>
+                            <ul>
+                                {% for line_sale in sale.line_vente %}
+                                    <li>{{line_sale}}
+                                {% endfor %}
+                                </li>
+                            </ul>
+                        </ul>
+                    {% endfor %}
+                    </td>
+                    <td>{{most_sold_product}}</td>
+                    <td>{{max_quantity}}</td>
+                    
             </tr>
-        {% endfor %}
-        </table>
-
-        <h2>Store 3</h2>
-        <table>
-        <tr>
-            <th>Sale ID</th>
-            <th>Sale total</th>
-        </tr>
-        {% for sale in sales3 %}
-            <tr>
-                <td>{{sale.id}}</td>
-                <td>{{sale.total}}$</td>
-            </tr>
-        {% endfor %}
-        </table>
-
-        <h2>Store 4</h2>
-        <table>
-        <tr>
-            <th>Sale ID</th>
-            <th>Sale total</th>
-        </tr>
-        {% for sale in sales4 %}
-            <tr>
-                <td>{{sale.id}}</td>
-                <td>{{sale.total}}$</td>
-            </tr>
-        {% endfor %}
-        </table>
-
-        <h2>Store 5</h2>
-        <table>
-        <tr>
-            <th>Sale ID</th>
-            <th>Sale total</th>
-        </tr>
-        {% for sale in sales5 %}
-            <tr>
-                <td>{{sale.id}}</td>
-                <td>{{sale.total}}$</td>
-            </tr>
-        {% endfor %}
         </table>
     </div>
 </body>

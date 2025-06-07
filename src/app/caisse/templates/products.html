@@ -15,6 +15,10 @@
         .container > h1 { 
             margin-left: auto; margin-right: auto;
         }
+
+        table, th, td {
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
@@ -24,7 +28,7 @@
     <button type="submit">Search</button>
 </form>
     <div class="container">
-    <h1><a href="">Products Store 1</a></h1>
+    <h1><a href="{% url 'report' 1%}">Products Store 1</a></h1>
     <table>
     <tr>
         <th>Product ID</th>
@@ -36,6 +40,7 @@
         <th>Restock?</th>
     </tr>
     {% for product, stock in zipped1 %}
+
         <tr>
             <td>{{product.id}}</td>
             <td>{{product.name}}</td>
@@ -45,7 +50,10 @@
             <td>{{stock.quantite}}</td>
             <td>
                 {% if stock.quantite < 25 %}
-                    <button href="/restock/{{depot.products}}">Restock</button>
+                    <form method="get" action="{% url 'restock_product' product.id 1 %}" style="display:inline;">
+                        <!-- <input type="hidden" name="quantity" value="10"> -->
+                        <button type="submit">Restock</button>
+                    </form>
                 {% else %}
                     No restock needed
                 {% endif %}
@@ -54,7 +62,7 @@
     {% endfor %}
     </table>
 
-    <h1 ><a href="">Products Store 2</a></h1>
+    <h1 ><a href="{% url 'report' 2%}">Products Store 2</a></h1>
     <table>
     <tr>
         <th>Product ID</th>
@@ -75,7 +83,10 @@
             <td>{{stock.quantite}}</td>
             <td>
                 {% if stock.quantite < 25 %}
-                    <button href="/restock/{{depot.products}}">Restock</button>
+                    <form method="get" action="{% url 'restock_product' product.id 2 %}" style="display:inline;">
+                        <!-- <input type="hidden" name="quantity" value="10"> -->
+                        <button type="submit">Restock</button>
+                    </form>
                 {% else %}
                     No restock needed
                 {% endif %}
@@ -84,7 +95,7 @@
     {% endfor %}
     </table>
 
-    <h1><a href="">Products Store 3</a></h1>
+    <h1><a href="{% url 'report' 3%}">Products Store 3</a></h1>
     <table>
     <tr>
         <th>Product ID</th>
@@ -105,7 +116,10 @@
             <td>{{stock.quantite}}</td>
             <td>
                 {% if stock.quantite < 25 %}
-                    <button href="/restock/{{depot.products}}">Restock</button>
+                    <form method="get" action="{% url 'restock_product' product.id 3 %}" style="display:inline;">
+                        <!-- <input type="hidden" name="quantity" value="10"> -->
+                        <button type="submit">Restock</button>
+                    </form>
                 {% else %}
                     No restock needed
                 {% endif %}
@@ -114,7 +128,7 @@
     {% endfor %}
     </table>
 
-    <h1><a href="">Products Store 4</a></h1>
+    <h1><a href="{% url 'report' 4%}">Products Store 4</a></h1>
     <table>
     <tr>
         <th>Product ID</th>
@@ -135,7 +149,10 @@
             <td>{{stock.quantite}}</td>
             <td>
                 {% if stock.quantite < 25 %}
-                    <button href="/restock/{{depot.products}}">Restock</button>
+                    <form method="get" action="{% url 'restock_product' product.id 4 %}" style="display:inline;">
+                        <!-- <input type="hidden" name="quantity" value="10"> -->
+                        <button type="submit">Restock</button>
+                    </form>
                 {% else %}
                     No restock needed
                 {% endif %}
@@ -144,7 +161,7 @@
     {% endfor %}
     </table>
 
-    <h1 ><a href="">Products Store 5</a></h1>
+    <h1 ><a href="{% url 'report' 5%}">Products Store 5</a></h1>
     <table> 
     <tr>
         <th>Product ID</th>
@@ -165,7 +182,10 @@
             <td>{{stock.quantite}}</td>
             <td>
                 {% if stock.quantite < 25 %}
-                    <button href="/restock/{{depot.products}}">Restock</button>
+                    <form method="get" action="{% url 'restock_product' product.id 5 %}" style="display:inline;">
+                        <!-- <input type="hidden" name="quantity" value="10"> -->
+                        <button type="submit">Restock</button>
+                    </form>
                 {% else %}
                     No restock needed
                 {% endif %}

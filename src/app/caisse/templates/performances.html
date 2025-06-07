@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central stock</title>
+    <style>
+        .container { 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .container > table { 
+            margin-left: auto;margin-right: auto; width: 40%;
+        }
+
+        .container > h1 { 
+            margin-left: auto; margin-right: auto;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Performances</h1>
+
+    <table>
+        <tr>
+            <th>Store ID</th>
+            <th>Total amount made in sales</th>
+            <th>Product in surplus</th>
+            <th>Product in rupture of stocks</th>
+        </tr>
+        {% for total, stocks_store, store_id in performances %}
+            <tr>
+                <td>Store ID : {{store_id}}</td>
+                <td>{{total}}$</td>
+                <td>
+                    {% for stock in stocks_store %}
+                        {% if stock.quantite > 65 %}
+                            <ul>
+                                <li>Product ID: {{stock.product}}: Stocks: {{stock.quantite}}</li>
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for stock in stocks_store %}
+                        {% if stock.quantite < 15 %}
+                            <ul>
+                                <li>Product ID: {{stock.product}}: Stocks: {{stock.quantite}}</li>
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+</body>
+</html> 

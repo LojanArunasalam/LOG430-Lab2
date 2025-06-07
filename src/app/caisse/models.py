@@ -17,6 +17,9 @@ class LineSale(Base):
     sale = Column(Integer, ForeignKey("sales.id"))
     product = Column(Integer, ForeignKey("products.id"))
 
+    def __str__(self):
+        return f"Product ID: {self.product} - Quantity: {self.quantite} - Price: {self.prix}"
+
     @classmethod
     def get_by_id(cls, session, id):
         line_sale = session.query(cls).filter_by(id=id).first()
@@ -42,7 +45,7 @@ class Stock(Base):
     store = Column(Integer, ForeignKey("stores.id"))
 
     def __str__(self):
-        return f"{self.quantite}"
+        return f"{self.product} - {self.quantite}"
 
     @classmethod
     def get_stock_by_id(cls, session, id):
@@ -79,6 +82,9 @@ class Product(Base):
     line_sale = relationship(LineSale)
     stock = relationship(Stock)
 
+    def __str__(self):
+        return f"{self.name} - {self.category} - {self.prix_unitaire}"
+
     @classmethod
     def get_by_id(cls, session, id):
         product = session.query(cls).filter_by(id=id).first()
@@ -112,6 +118,9 @@ class Sale(Base):
     user = Column(ForeignKey("users.id"))
     store = Column(ForeignKey("stores.id"))
 
+    def __str__(self):
+        return f"Sale {self.id} - Total: {self.total}"    
+
     @classmethod
     def get_sales_by_store(cls, session, store_id):
         sales = session.query(cls).filter_by(store=store_id).all()
@@ -141,6 +150,9 @@ class User(Base):
 
     #Relationships
     sale = relationship(Sale)
+
+    def __str__(self):
+        return f"{self.name} - ID: {self.id}"
 
     @classmethod
     def get_user_by_id(cls, session, id):
@@ -189,6 +201,9 @@ class Store(Base):
     #Relationships
     stocks = relationship(Stock)
     sales = relationship(Sale)
+
+    def __str__(self):
+        return f"{self.name} - ID: {self.id}"
 
     @classmethod
     def get_store_by_id(cls, session, id):
