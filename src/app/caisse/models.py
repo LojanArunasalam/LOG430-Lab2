@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 import logging
 import os 
 
+logging.basicConfig(level=logging.DEBUG, filename='app.log', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logging = logging.getLogger(__name__)
+
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -141,7 +143,7 @@ class Product(Base):
 class Sale(Base):
     __tablename__ = "sales"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     total = Column(Float)
 
     #Relationships

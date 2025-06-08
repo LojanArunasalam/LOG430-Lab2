@@ -1,25 +1,32 @@
 @startuml  
-
-
-title Diagramme de déploiement - Système de point de vente
-node "<<device>>\nClient POS" { 
+top to bottom direction
+title Diagramme de déploiement - Système de magasin
+node "<<server>>\nWeb Server" { 
     artifact { 
-        file "app.py" 
-    }
+        artifact "Application Django" { 
+            file "controller.py"
+            file "models.py"
+            file "views.py"
+        }
+    } 
+}
 
-    artifact { 
-        file "models.py"
+node "<<device>>\n Magasin" { 
+    artifact "Browser" { 
+        file "HTML templates"
     }
 }
 
-database "<<device>>\ndb_server" { 
+database "<<device>>\nDB server" { 
     artifact { 
         agent "PostgreSQL server"
     }
 }
 
 
-"app.py" --> "models.py"
-"<<device>>\nClient POS" -->"<<device>>\ndb_server" : ORM via SQLAlchemy
-
+"controller.py" <--> "models.py" : uses
+"models.py" <-- "<<device>>\nDB server" : ORM via SQLAlchemy
+"controller.py" <--> "views.py" : uses
+"models.py" <--> "views.py" : uses
+"views.py" --> "<<device>>\n Magasin" : HTTP requests
 @enduml 

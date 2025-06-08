@@ -8,4 +8,5 @@ urlpatterns = [
     path("stock-central/", views.dashboard_logistique, name="stock-central"),
     path('restock/<int:product_id>/<int:store_id>/', views.restock_product, name='restock_product'),
     path("performances/", views.performances, name="performances"),
+    path("buy-product/<int:product_id>/<int:store_id>/", views.buy_product, name="buy_product"),
 ]

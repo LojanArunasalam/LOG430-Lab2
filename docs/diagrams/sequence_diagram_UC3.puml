@@ -5,14 +5,33 @@ skinparam sequence {
     MessageAlign center
 }
 
-title Diagramme de séquence UC3 - Gérer un retour de vente
+title Diagramme de séquence - UC3: Visualiser les performances des magasins dans un tableau de bord
 
-participant "user" as user
-participant "app" as app
-participant "database" as db 
+actor gestionnaire as user
+participant "views.py" as vue
+participant "controller.py" as controller
+participant "models.py" as model
+database "database" as db
 
-user -> app : Gérer un retour 
-app -> db : return_sale(sale)
+user -> vue : Visualiser les performances des magasins
+vue -> controller : performances()
+controller -> model : Store.get_all_stores(session)
+model -> db : get_all_stores(session)
+db --> model : stores
+model --> controller : stores
 
+loop for store in stores
+    controller -> model : Sale.get_sales_by_store(session, store.id)
+    model -> db : get_sales_by_store(session, store.id)
+    db --> model : sales
+    model --> controller : sales
 
+    controller -> model : Stock.get_stock_by_store(session, store.id)
+    model -> db : get
+    db --> model : stocks
+    model --> controller : stocks, stores, sales
+end loop 
+
+controller --> vue : données = (stores, sales, stocks)
+vue --> user : render("performances.html", données)
 @enduml

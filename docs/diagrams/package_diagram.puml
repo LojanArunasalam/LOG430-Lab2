@@ -1,23 +1,29 @@
 @startuml
-
 hide circle
 hide members
-
+top to bottom direction
 title Diagramme de package - Système de point de vente 
 
-package " Couche Présentation " as P1 {
-    folder "TUI"
+package "Couche Web" {
+    folder "Interface Utilisateur" { 
+        file "templates HTML"
+    }
 }
 
-package " Couche Logique " as P2 {
-    folder "App"
+package "Couche Application" {
+    folder "Controller"
+    folder "Views"
+    folder "Models"
 }
 
-package " Couche Persistence " as P3 {
+package "Couche Persistence" {
     folder "Database"
 }
 
+Controller <-> Views
+Controller <-> Models 
+Models <-> Views
 
-TUI --> App
-App --> Database
+"Couche Web" --> "Couche Application"
+"Couche Application" --> "Couche Persistence"
 @enduml

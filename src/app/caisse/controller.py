@@ -1,5 +1,10 @@
-from .models import Product, Stock, Sale, LineSale, Store, User, Product_Depot, engine, logging 
+from .models import Product, Stock, Sale, LineSale, Store, User, Product_Depot, engine 
 from sqlalchemy.orm import sessionmaker
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging = logging.getLogger(__name__)
 
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -68,3 +73,4 @@ def generate_report(store_id):
 
     logging.info(f"Generated successfully report for store {store_id}")
     return report
+

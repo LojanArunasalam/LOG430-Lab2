@@ -1,18 +1,11 @@
-Template tire
 Introduction and Goals
 ======================
 
-Describes the relevant requirements and the driving forces that software
-architects and development team must consider. These include
+Le but de cette exercice est de developper une systeme de point de vente pour une entreprise contenant des magasins, permettant la gestion des magasins et de leurs produits. 
 
--   underlying business goals, essential features and functional
-    requirements for the system
+Fonctionnalités essentielles:
+-  
 
--   quality goals for the architecture
-
--   relevant stakeholders and their expectations
-
-Requirements Overview
 ---------------------
 
 **Contents.**

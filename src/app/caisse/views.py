@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import select
 from .models import Product, Stock, Sale, LineSale, Store, Product_Depot, engine, logging
 from . import controller
+from .caisse_controller import Caisse
 
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -75,6 +76,11 @@ def dashboard_logistique(request):
     depots = Product_Depot.get_all_product_depots(session)
     return render(request, "stock-central.html", {"depots": depots})
 
+
+def buy_product(request, product_id, store_id):
+    caisse = Caisse(store_id)
+    caisse.enregistrer_vente(product_id)
+    return redirect("products")
 
 
 

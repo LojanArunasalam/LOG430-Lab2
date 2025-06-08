@@ -4,9 +4,9 @@ title Diagramme de classes - Système de magasin
 
 class Produit {
   id: int
-  nom: str
-  description: str
-  categorie: str
+  nom: string
+  categorie: string
+  description: string
   prix_unitaire: float
 }
 
@@ -18,39 +18,39 @@ class Vente {
 class LigneVente {
   id: int
   quantite: int
-  prix_total: float
+  prix: float
 }
 
 class Utilisateur {
   id: int
-  nom: str
-  identifiant: str
+  nom: string
 }
 
 class Stock { 
   id: int 
   quantite: int
-  product: Product
+  produit_id: int
+  magasin_id: int
 }
 
 class Magasin { 
   id: int
-  name: str
-  location: str
+  nom: string
 }
 
-class ProductDepot { 
+class Produit_Depot { 
   id: int
-  product: str
-  quantite: int
+  quantite_depot: int
+  produit_id: int
 }
 
 ' Relations entre classes
-Vente "1" -- "0..*" LigneVente : contient >
-LigneVente "0..*" --> "1" Produit : réfert à un >
-Vente "*" --> "1" Utilisateur : < fait
-Produit "1" --> "1" Stock : a > 
-Magasin "1" --> "0..*" Stock: contient du > 
-Magasin "1"--> "0..*" Vente : ont des
-CentreLogistique "1" --> "0..*" Produit: ont des
+LigneVente "*" -- "1" Produit: est associée à
+LigneVente "*" -- "1" Vente: fait partie de
+Stock "*" -- "1" Produit: contient
+Stock "*" -- "1" Magasin: appartient à
+Vente "*" -- "1" Magasin: réalisée dans
+Utilisateur "1" -- "*" Vente: effectue
+Produit_Depot "*" -- "1" Produit: est associé à
+
 @enduml
