@@ -21,6 +21,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Pull postgres
+      run: |
+        docker pull postgres:16
+        docker run --name postgres -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=postgres -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 -v ./init.sql:/docker-entrypoint-initdb.d/init.sql -d postgres:16
     - name: Set up Python 3.12
       uses: actions/setup-python@v3
       with:
