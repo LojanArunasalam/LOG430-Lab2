@@ -8,5 +8,5 @@ COPY . .
 # RUN command: like trying to run a linux command
 RUN pip install -r requirements.txt
 
-CMD [ "python", "src/app.py" ]
+CMD [ "python", "src/app/manage.py", "runserver"]
 
