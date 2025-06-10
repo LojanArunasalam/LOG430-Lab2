@@ -6,8 +6,8 @@
 # Lancer le projet 
 1. Se placer sur le root directory
 ```
-cd src 
-python app.py
+cd src/app
+python manage.py runserver
 ```
 
 # Lancer le conteneur
@@ -17,10 +17,9 @@ docker compose up -d db
 ```
 2. Effectuer 3 splits du terminal, et rouler une dans chaque terminal
 ```
-docker compose run --rm --service-ports caisse-1
-docker compose run --rm --service-ports caisse-2
-docker compose run --rm --service-ports caisse-3
+docker compose run --rm django-client
 ```
-
 # Lancer les tests
-1.
+```
+pytest src/app/caisse/tests.py
+```
