@@ -2,39 +2,30 @@
 hide circle
 hide members
 top to bottom direction
-title Diagramme de package - Système de point de vente
+title Diagramme de composant - Système de point de vente
 
+package "web" { 
+    component browser
+}
 
 package caisse {
 
-    package "Couche Web" {
-        folder templates {
-            file "base.html"
-            file "home.html"
-            file "products.html"
-            file "report.html"
-            file "performances.html"
-            file "stock-central.html"
-        }
-    }
-
-    package "Couche Application" {
-        file "views.py"
-        file "controller.py"
-        file "models.py"
-        file "caisse_controller.py"
-    }
-
-    package "Couche Persistence" {
-        file "PostgreSQL Database"
-    }
+    folder "templates"
+    component "views"
+    component "controleurs"
+    component "models"
+    
+}
+package "database" {
+    component "PostgreSQL"
 }
 
+browser --> templates : "Requêtes HTTP" 
+models --> PostgreSQL : "Requêtes SQL"
 
-"controller.py" <-> "views.py"
-"controller.py" <-> "models.py"
-"models.py" <-> "views.py"
+views <--> controleurs
+controleurs <--> models
+models <--> views
 
-"Couche Web" --> "Couche Application"
-"Couche Application" --> "Couche Persistence"
+templates --> views : "Rendu des vues"
 @enduml
