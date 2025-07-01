@@ -2,27 +2,38 @@
 hide circle
 hide members
 top to bottom direction
-title Diagramme de package - Système de point de vente 
+title Diagramme de package - Système de point de vente
 
-package "Couche Web" {
-    folder "Interface Utilisateur" { 
-        file "templates HTML"
+
+package caisse {
+
+    package "Couche Web" {
+        folder templates {
+            file "base.html"
+            file "home.html"
+            file "products.html"
+            file "report.html"
+            file "performances.html"
+            file "stock-central.html"
+        }
+    }
+
+    package "Couche Application" {
+        file "views.py"
+        file "controller.py"
+        file "models.py"
+        file "caisse_controller.py"
+    }
+
+    package "Couche Persistence" {
+        file "PostgreSQL Database"
     }
 }
 
-package "Couche Application" {
-    folder "Controller"
-    folder "Views"
-    folder "Models"
-}
 
-package "Couche Persistence" {
-    folder "Database"
-}
-
-Controller <-> Views
-Controller <-> Models 
-Models <-> Views
+"controller.py" <-> "views.py"
+"controller.py" <-> "models.py"
+"models.py" <-> "views.py"
 
 "Couche Web" --> "Couche Application"
 "Couche Application" --> "Couche Persistence"

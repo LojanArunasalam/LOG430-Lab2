@@ -1,6 +1,12 @@
 @startuml  
 top to bottom direction
 title Diagramme de déploiement - Système de magasin
+node "<<device>>\n Magasin" { 
+    artifact "Browser" { 
+        file "HTML templates"
+    }
+}
+
 node "<<server>>\nWeb Server" { 
     artifact { 
         artifact "Application Django" { 
@@ -11,11 +17,7 @@ node "<<server>>\nWeb Server" {
     } 
 }
 
-node "<<device>>\n Magasin" { 
-    artifact "Browser" { 
-        file "HTML templates"
-    }
-}
+
 
 database "<<device>>\nDB server" { 
     artifact { 
@@ -25,8 +27,8 @@ database "<<device>>\nDB server" {
 
 
 "controller.py" <--> "models.py" : uses
-"models.py" <-- "<<device>>\nDB server" : ORM via SQLAlchemy
 "controller.py" <--> "views.py" : uses
 "models.py" <--> "views.py" : uses
-"views.py" --> "<<device>>\n Magasin" : HTTP requests
+"<<device>>\n Magasin" --> "<<server>>\nWeb Server" : HTTP requests
+"<<server>>\nWeb Server" --> "<<device>>\nDB server" : ORM via SQLAlchemy
 @enduml 
