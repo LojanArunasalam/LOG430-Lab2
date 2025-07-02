@@ -44,13 +44,13 @@ class Produit_Depot {
   produit_id: int
 }
 
-' Relations entre classes
-LigneVente "*" -- "1" Produit: est associée à
-LigneVente "*" -- "1" Vente: fait partie de
-Stock "*" -- "1" Produit: contient
-Stock "*" -- "1" Magasin: appartient à
-Vente "*" -- "1" Magasin: réalisée dans
-Utilisateur "1" -- "*" Vente: effectue
-Produit_Depot "*" -- "1" Produit: est associé à
+' Relations entre classes (UML notation)
+Produit ||--o{ LigneVente : "est associée à"
+Vente ||--o{ LigneVente : "contient"
+Produit ||--o{ Stock : "stocké dans"
+Magasin ||--o{ Stock : "possède"
+Magasin ||--o{ Vente : "lieu de vente"
+Utilisateur ||--o{ Vente : "effectue"
+Produit ||--o{ Produit_Depot : "entreposé"
 
 @enduml

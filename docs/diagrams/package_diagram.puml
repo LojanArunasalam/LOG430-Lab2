@@ -4,28 +4,18 @@ hide members
 top to bottom direction
 title Diagramme de composant - Système de point de vente
 
-package "web" { 
-    component browser
-}
-
-package caisse {
-
+package app/app/caisse {
     folder "templates"
     component "views"
     component "controleurs"
     component "models"
-    
+    component "tests"
 }
-package "database" {
-    component "PostgreSQL"
-}
-
-browser --> templates : "Requêtes HTTP" 
-models --> PostgreSQL : "Requêtes SQL"
 
 views <--> controleurs
 controleurs <--> models
 models <--> views
+tests <--> models : "Tests unitaires"
 
 templates --> views : "Rendu des vues"
 @enduml

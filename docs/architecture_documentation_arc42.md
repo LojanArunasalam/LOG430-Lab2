@@ -61,6 +61,8 @@ Business Context
 Technical Context
 -----------------
 
+![Diagramme de classes](image-6.png)
+
 ![Diagramme de cas d'utilisation](image-5.png)
 
 *Mapping Input/Output to Channels*
